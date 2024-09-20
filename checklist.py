@@ -6,15 +6,24 @@ def create(item):
 
 # READ
 def read(index):
-    return checklist[index]
-
+    if 0 <= index < len(checklist): 
+        return checklist[index]
+    else:
+        return "Index out of range." 
+    
 # UPDATE
 def update(index, item):
-    checklist[index] = item
+    if 0 <= index < len(checklist): 
+     checklist[index] = item
+    else:
+        print("Index out of range.")
 
 # DESTROY
 def destroy(index):
-    checklist.pop(index)
+    if 0 <= index < len(checklist): 
+        checklist.pop(index)
+    else:
+        print("Index out of range.")
 
 def list_all_items():
     index = 0
@@ -23,14 +32,10 @@ def list_all_items():
         index += 1
 
 def mark_completed(index):
-    checklist[index] = ("{} {}".format("√", checklist[index]))
-    return checklist
-
-def user_input(prompt):
-    # the input function will display a message in the terminal
-    # and wait for user input.
-    user_input = input(prompt)
-    return user_input
+    if 0 <= index < len(checklist):  
+        checklist[index] = "√ " + checklist[index]  
+    else:
+        print("Index out of range.")
 
 def select(function_code):
     # Create item
@@ -48,14 +53,18 @@ def select(function_code):
     # Print all items
     elif function_code == "P":
         list_all_items()
-    
-    elif function_code == "Q":
-        # This is where we want to stop our loop
-        return False    
 
     # Catch all
     else:
         print("Unknown Option")
+
+def user_input(prompt):
+    # the input function will display a message in the terminal
+    # and wait for user input.
+    user_input = input(prompt)
+    return user_input
+
+
 
 
 
@@ -71,9 +80,9 @@ def test():
     destroy(1)
 
     print(read(0))
-
+#print(read(1))
     list_all_items()
-    
+    # Call your new function with the appropriate value
     select("C")
     # View the results
     list_all_items()
@@ -81,13 +90,13 @@ def test():
     select("R")
     # View results
     list_all_items()
-
+    # Continue until all code is run
     user_value = user_input("Please Enter a value:")
     print(user_value)
 test()
 
-running = True
-while running:
-    selection = user_input(
-        "Press C to add to list, R to Read from list, P to display list, and Q to quit")
-    running = select(selection)
+
+
+#checklist = ['Blue', 'Orange']
+#checklist[1] = 'Cats'
+#print(checklist)
